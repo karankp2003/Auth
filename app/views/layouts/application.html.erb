@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Auth</title>
+	<%= stylesheet_link_tag :all %>
+	<%= javascript_include_tag :defaults %>
+	<%= csrf_meta_tag %>
+</head>
+<style type="text/css" media="screen">
+		html {
+		margin:0;
+		padding:0; 
+		width:100%; 
+		}
+		body {
+		width:80%; 
+		margin:0 auto;
+		clear:both;  
+		}
+		#user_nav {
+		width:100%;
+		margin:0px 0px; 
+		float:left; 
+		clear:both;
+		background-color: #036564;  
+		padding:10px;  
+		}
+		.logon {
+		clear:both; 
+		float:right;
+		margin:0px; 
+		padding: 5px 5px; 
+		background-color: #DEE;  
+		}
+		.flash_msgs {
+		width:100%; 
+		clear:both; 
+		float:left; 
+		background-color: #036564;
+		color: #fff;
+		padding:10px;  
+		}
+		#flash_ {
+		clear:both; 
+		float:right;
+		}
+		.wrapper {
+		width:100%; 
+		margin:0 0;
+		clear:both;
+		background-color: #CDB380; 
+		padding:10px;  
+		}
+</style>
+
+<body>
+
+<div id="user_nav">
+	<div class="logon">
+		<% if current_user %>
+			Hello <%= current_user.email %>.
+			<%= link_to "Log out", log_out_path %>
+		<% else %>
+			<%= link_to "Sign up", sign_up_path %> or
+			<%= link_to "log in", log_in_path %>
+		<% end %>
+	</div>
+</div>
+
+<div class="flash_msgs">
+		<% flash.each do |name, msg| %>
+			<%= content_tag :div, msg, :id => "flash_#{name}" %>
+		<% end %>
+</div>
+
+<div class="wrapper">
+	<%= yield %>
+</div>
+
+</body>
+</html>
